@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Language Detection</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Sign Language Detection</h1>
+    </header>
+    <main>
+      <div class="upload-section">
+        <label for="upload-image">Upload Image:</label>
+        <input type="file" id="upload-image" accept="image/*" />
+      </div>
+      <div id="result">
+        <h3>Prediction:</h3>
+        <p id="prediction-text">No prediction yet.</p>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
