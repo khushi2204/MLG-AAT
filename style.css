@@ -11,15 +11,13 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 /* Header Styling */
 header {
   background: rgba(0, 0, 0, 0.7);
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 2px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -28,21 +26,45 @@ header h1 {
   font-weight: bold;
   animation: fadeIn 2s ease-out;
 }
-
 /* Main Content */
 main {
-  margin-top: 2rem;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  max-width: 1200px;
+  gap: 2rem;
+  padding: 3rem;
   border-radius: 15px;
+  background: rgba(255, 255, 255, 0.2);
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   animation: slideIn 1.5s ease;
 }
 
+.info-section,
 .upload-section {
-  margin-bottom: 2rem;
+  flex: 1;
+  min-width: 300px;
+  padding: 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.info-section {
+  text-align: left;
+}
+
+.info-section h2,
+.upload-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.info-section ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  text-align: left;
 }
 
 .upload-section label {
@@ -72,6 +94,18 @@ main {
 #prediction-text {
   font-weight: bold;
   animation: textGlow 1.5s infinite alternate;
+}
+
+/* Footer Styling */
+footer {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 1rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  margin-top: auto;
+  font-size: 1rem;
+  color: #fff;
 }
 
 /* Keyframes for Animations */
