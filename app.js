@@ -1,34 +1,45 @@
-document
-  .getElementById("upload-image")
-  .addEventListener("change", async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        const imageData = e.target.result;
+const uploadImage = document.getElementById("upload-image");
+const predictionText = document.getElementById("prediction-text");
+const predictionStatus = document.getElementById("prediction-status");
+const alphabetSound = document.getElementById("alphabet-sound");
 
-        // Call the API or model to predict
-        const prediction = await predictSignLanguage(imageData);
-        document.getElementById("prediction-text").textContent = prediction;
-      };
-      reader.readAsDataURL(file);
+uploadImage.addEventListener("change", async (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  // Show processing status
+  predictionStatus.style.display = "block";
+  predictionStatus.textContent = "Processing...";
+
+  const reader = new FileReader();
+  reader.onload = async () => {
+    const base64Image = reader.result.split(",")[1]; // Remove the data:image part of the base64 string
+
+    try {
+      const response = await fetch("http://127.0.0.1:5000", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ image: base64Image }),
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch prediction");
+
+      const result = await response.json();
+      predictionText.textContent = `The predicted sign is: ${result.alphabet}`;
+      predictionStatus.style.display = "none";
+
+      // Update and play the audio
+      alphabetSound.style.display = "block";
+      alphabetSound.src = `data:audio/mp3;base64,${result.sound}`;
+      alphabetSound.play();
+    } catch (error) {
+      console.error("Error:", error);
+      predictionText.textContent = "Error processing the image.";
+      predictionStatus.style.display = "none";
     }
-  });
+  };
 
-// Example function to call your ML model or API
-async function predictSignLanguage(imageData) {
-  try {
-    const response = await fetch("http://localhost:5000/predict", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ image: imageData }),
-    });
-    const data = await response.json();
-    return data.prediction; // Assuming API returns { prediction: "Detected Sign" }
-  } catch (error) {
-    console.error("Error predicting:", error);
-    return "Error in prediction";
-  }
-}
+  reader.readAsDataURL(file); // Read file as base64
+});

@@ -7,51 +7,28 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Header Section -->
     <header>
       <h1>Sign Language Detection</h1>
     </header>
 
-    <!-- Main Content Section -->
     <main>
-      <!-- Information Section -->
-      <div class="info-section" id="info">
-        <h2>Facts About Sign Language</h2>
-        <ul>
-          <li>
-            Sign language is a complete, complex language that uses hand
-            gestures, body movements, and facial expressions.
-          </li>
-          <li>There are over 300 different sign languages worldwide.</li>
-          <li>
-            American Sign Language (ASL) is widely used in the United States and
-            Canada.
-          </li>
-          <li>
-            Sign languages are not universal; each has its own grammar and
-            lexicon.
-          </li>
-        </ul>
-      </div>
-
-      <!-- Upload Section -->
-      <div class="upload-section" id="upload">
+      <div class="upload-section">
         <h2>Upload an Image</h2>
         <label for="upload-image">Select an image:</label>
         <input type="file" id="upload-image" accept="image/*" />
         <div id="result">
           <h3>Prediction:</h3>
           <p id="prediction-text">No prediction yet.</p>
+          <p id="prediction-status" style="display: none">Processing...</p>
         </div>
+        <audio id="alphabet-sound" controls style="display: none"></audio>
       </div>
     </main>
 
-    <!-- Footer Section -->
-    <footer id="contact">
+    <footer>
       <p>&copy; 2024 Sign Language Detection. All Rights Reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
     <script src="app.js"></script>
   </body>
 </html>
