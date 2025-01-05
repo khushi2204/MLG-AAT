@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"; // Assuming you add CSS in this file
 
 export default function FileUpload() {
   const [prediction, setPrediction] = useState(null);
@@ -53,17 +53,26 @@ export default function FileUpload() {
   };
 
   return (
-    <>
+    <div className="file-upload-container">
+      <header className="file-upload-header">
+        <h1>Sign Language Alphabet Predictor</h1>
+        <p>
+          Empower communication through technology! Upload an image of a hand
+          gesture, and let our AI model predict the corresponding alphabet.
+        </p>
+      </header>
       <div className="upload-section">
         <h2>Upload an Image</h2>
-        <label htmlFor="upload-image">Select an image:</label>
+        <label htmlFor="upload-image" className="animated-label">
+          Select an image:
+        </label>
         <input
           type="file"
           id="upload-image"
           accept="image/*"
           onChange={handleFileChange}
         />
-        <div>
+        <div className="model-selector">
           <label htmlFor="model-choice">Choose a model:</label>
           <select
             id="model-choice"
@@ -71,17 +80,24 @@ export default function FileUpload() {
             value={predictionModel}
           >
             <option value="svm">SVM</option>
-            <option value="svm">Random Search</option>
-            <option value="svm">CNN</option> {/* Add CNN option */}
+            <option value="svm">Logistic Regression</option>
+            <option value="svm">Random Forest</option>
           </select>
         </div>
-        <div id="result">
+        <div id="result" className="result-section">
           <h3>Prediction:</h3>
           <p id="prediction-text">{prediction || "No prediction yet."}</p>
           <p id="prediction-status">{status}</p>
         </div>
-        {audioSrc && <audio id="alphabet-sound" controls src={audioSrc} />}
+        {audioSrc && (
+          <audio
+            id="alphabet-sound"
+            controls
+            src={audioSrc}
+            className="audio-control"
+          />
+        )}
       </div>
-    </>
+    </div>
   );
 }
